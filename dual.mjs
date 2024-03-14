@@ -24,4 +24,8 @@ import Router from 'react-easy-router';
 import { adapter } from 'parse5-htmlparser2-tree-adapter';
 import { stringify } from '@adobe/css-tools'
 import { getTsconfig } from 'get-tsconfig'
+import { Trie } from '@wry/trie';
+import { Slot } from '@wry/context';
+import { spy } from 'tinyspy';
+
 // d3-array: browser..

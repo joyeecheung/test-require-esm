@@ -24,3 +24,6 @@ const Router = require('react-easy-router');
 const { adapter } = require('parse5-htmlparser2-tree-adapter');
 const { stringify } = require('@adobe/css-tools');
 const { getTsconfig } = require('get-tsconfig');
+const { Trie } = require('@wry/trie');
+const { Slot } = require('@wry/context');
+const { spy } = require('tinyspy');
