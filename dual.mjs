@@ -21,8 +21,7 @@ import { autoPlacement } from "@floating-ui/core";
 import { marked } from 'marked';
 import { createStore, applyMiddleware } from 'redux';
 import Router from 'react-easy-router';
-import adaptor from 'parse5-htmlparser2-tree-adapter';
-import { parse, stringify } from '@adobe/css-tools'
+import { adapter } from 'parse5-htmlparser2-tree-adapter';
+import { stringify } from '@adobe/css-tools'
 import { getTsconfig } from 'get-tsconfig'
-
 // d3-array: browser..

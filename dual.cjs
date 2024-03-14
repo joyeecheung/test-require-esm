@@ -1,4 +1,3 @@
-
 'use strict';
 
 const { register } = require('ts-node');
@@ -22,6 +21,6 @@ const { autoPlacement } = require("@floating-ui/core");
 const { marked } = require('marked');
 const { createStore, applyMiddleware } = require('redux');
 const Router = require('react-easy-router');
-const adaptor = require('parse5-htmlparser2-tree-adapter');
-const { parse, stringify } = require('@adobe/css-tools');
+const { adapter } = require('parse5-htmlparser2-tree-adapter');
+const { stringify } = require('@adobe/css-tools');
 const { getTsconfig } = require('get-tsconfig');
