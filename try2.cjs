@@ -4,7 +4,7 @@ const pjson = require('./package.json');
 const { Worker } = require('worker_threads');
 const deps = Object.keys(pjson.dependencies);
 
-const disallowlist = [ 'serve', 'quill', 'node-releases', 'jest-watch-typeahead', '@semantic-release/npm' ];
+const disallowlist = [ 'serve', 'quill', 'node-releases', 'jest-watch-typeahead', '@semantic-release/npm', 'zone.js' ];
 const type = process.env.MODULE_TYPE || 'esm';
 const packages = deps.filter(i => types[i] === type && !disallowlist.includes(i) && !i.includes('@types') && !i.includes('angular'));
 const failures = [];

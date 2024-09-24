@@ -7,16 +7,18 @@ const pjson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const types = JSON.parse(fs.readFileSync('./type.json', 'utf8'));
 const deps = pjson.dependencies || {};
 const installed = {};
-const list = npmHighImpact.slice(0, 5000).filter(i => types[i] === 'dual');
-console.log(list.length, 'to install');
+const type = process.env.MODULE_TYPE || 'esm';
+const list = npmHighImpact.slice(0, 5000).filter(
+  p => types[p] === type && (deps[p] === '*' || !deps[p]) && !disallow.includes(p)
+);
+
+console.log(list.length, `${type} packages to install`);
 const batch = 10;
 for (let i = 0; i < list.length; i += batch) {
   const toInstall = [];
 	for (let j = 0; j < batch; ++j) {
 		const p = list[i + j];
-		if ((deps[p] === '*' || !deps[p]) && !disallow.includes(p)) {
-      toInstall.push(p);
-    }
+    toInstall.push(p);
   }
 
 	if (toInstall.length > 0) {
