@@ -4,9 +4,11 @@ const pjson = require('./package.json');
 const { Worker } = require('worker_threads');
 const deps = Object.keys(pjson.dependencies);
 
-const disallowlist = [ 'serve', 'quill', 'node-releases', 'jest-watch-typeahead', '@semantic-release/npm', 'zone.js' ];
-const type = process.env.MODULE_TYPE || 'esm';
-const packages = deps.filter(i => types[i] === type && !disallowlist.includes(i) && !i.includes('@types') && !i.includes('angular'));
+const disallowlist = [ 'serve', 'quill', 'node-releases', 'jest-watch-typeahead', '@semantic-release/npm', 'zone.js', '@storybook/ui', 'bootstrap', '@storybook/testing-library' ];
+const type = process.env.MODULE_TYPE.trim() || 'esm';
+let packages = deps.filter(i => types[i] === type);
+packages = packages.filter(i => !disallowlist.includes(i) && !i.includes('@types') && !i.includes('angular') && !i.includes('workbox'));
+
 const failures = [];
 const passed = [];
 for (let i = 0; i < packages.length; ++i) {
@@ -30,6 +32,7 @@ const retried = {};
 const toRetry = failures.filter(i => i.e.code !== 'ERR_REQUIRE_ASYNC_MODULE');
 const toFinish = new Set(toRetry.map(i => i.p));
 
+checkAndLog();
 function replace(p, oldKey, newKey) {
   retried[p] = `${oldKey} => ${newKey}`;
   groups[oldKey] = groups[oldKey].filter(i => i !== p);  // Remove it
